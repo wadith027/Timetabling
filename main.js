@@ -45,6 +45,7 @@ var noFlag = false;
 var multipleTeacherFlag = false;
 const days_in_weeks = ["Sunday","Monday", "Tuesday","Wednesday","Thursday"];
 var TLE = 0;
+var isSolutionExist = true;
 // var unsuccessfulNumber = 0;
 var unsuccessfulCourses = [];
 function initialize(){
@@ -210,8 +211,9 @@ function CSP(domain){
     // if(chosenLecture != null)console.log(chosenLecture.choosingCourse);
     if(chosenLecture == null){
       ind = ind - 1;
-      if(ind < 0){
+      if(ind <= 0){
         console.log("No Solution");
+        isSolutionExist = false;
         return;
       }
       // unassign works
@@ -235,8 +237,8 @@ function CSP(domain){
       
       // console.log("-------Solution Domain-------" );
       // console.log(solutionDomain);
-      // console.log("----------------DOmain---------------------");
-      // console.log(domain);
+      console.log("----------------DOmain---------------------");
+      console.log(domain);
       console.log("----------------False Course---------------------");
       console.log(falseCourse);
       
@@ -273,7 +275,7 @@ function CSP(domain){
       console.log(chosenLecture);
       solutionDomain.push(chosenLecture);
       ind = ind + 1;
-      var len = solutionDomain.length;
+      // var len = solutionDomain.length;
       // console.log("---------------domain r vittrer choosing course--------");
       // console.log(solutionDomain[len-1].choosingCourse);
       // console.log(solutionDomain.choosingCourse);
@@ -361,17 +363,17 @@ function selectLecture(domain){
                         multipleTeacherFlag = true;
                       }
                       // if(choosingCourse.courseName == "CSE 1211 Section 1"){
-                      //   // console.log(teacher_timetable[k].Teacher);
-                      //   console.log(teacher_timetable[k]);
-                      //   console.log("Day of the week and period");
-                      //   console.log(days_in_weeks[days]);
-                      //   console.log(i);
-                      //   console.log("availability");
-                      //   console.log("first");
-                      //   console.log(teacher_timetable[k][days_in_weeks[days]][i]);
-                      //   console.log(teacher_timetable[k][days_in_weeks[days]][i+1]);
-                      //   console.log("second");
-                      //   console.log(multipleTeacherFlag);
+                      //console.log(teacher_timetable[k].Teacher);
+                      //console.log(teacher_timetable[k]);
+                      //console.log("Day of the week and period");
+                      //console.log(days_in_weeks[days]);
+                      //console.log(i);
+                      //console.log("availability");
+                      //console.log("first");
+                      //console.log(teacher_timetable[k][days_in_weeks[days]][i]);
+                      //console.log(teacher_timetable[k][days_in_weeks[days]][i+1]);
+                      //console.log("second");
+                      //console.log(multipleTeacherFlag);
                       // }
                     }
                   }
@@ -426,9 +428,11 @@ function assignBatchPeriod(courseName, year, day, period ){
 }
 
 // console.log(teacher_timetable[0][days_in_weeks[0]][0]);
-
-console.log(teacher_timetable);
-console.log(year_timetable);
+if(isSolutionExist){
+  
+  console.log(teacher_timetable);
+  console.log(year_timetable);
+}
 // console.log(lecture);
 
 // var year_timetable = [];
