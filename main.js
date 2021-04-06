@@ -46,6 +46,7 @@ var multipleTeacherFlag = false;
 const days_in_weeks = ["Sunday","Monday", "Tuesday","Wednesday","Thursday"];
 var TLE = 0;
 var isSolutionExist = true;
+var reflushCounter = 0;
 // var unsuccessfulNumber = 0;
 var unsuccessfulCourses = [];
 function initialize(){
@@ -204,14 +205,14 @@ function CSP(domain){
   const totalNumberofLectures = domain.length;
   var ind = 0;
   var chosenLecture;
-  while(domain.length != 0){
-  // while(ind < totalNumberofLectures){
+  // while(domain.length != 0){
+  while(ind < totalNumberofLectures){
     chosenLecture = selectLecture(domain);
     // console.log("-----------------choosing lecture-----------");
     // if(chosenLecture != null)console.log(chosenLecture.choosingCourse);
     if(chosenLecture == null){
       ind = ind - 1;
-      if(ind <= 0){
+      if(ind < 0){
         console.log("No Solution");
         isSolutionExist = false;
         return;
@@ -219,7 +220,11 @@ function CSP(domain){
       // unassign works
       // TODO : ekhanei shob jhamela hoitese
       TLE = TLE + 1;
-      // if(TLE >= 5 ) return;
+      reflushCounter = reflushCounter + 1;
+      if(TLE >= 5 ) {
+        isSolutionExist = false;
+        return;
+      }
       console.log("----------------index of Lecture-----------");
       console.log(ind);
       console.log("unassign e dhukse");
@@ -230,15 +235,15 @@ function CSP(domain){
       // console.log("----------------DOmain karbar---------------------");
       // console.log(domain);
       var falseCourse = solutionDomain.pop();
-      // solutionDomain.pop( );
+      // solutionDomain.pop();
       // solutionDomain.pop();
       unsuccessfulCourses.push(falseCourse.choosingCourse);
       // domain.push(falseCourse.choosingCourse);
       
       // console.log("-------Solution Domain-------" );
       // console.log(solutionDomain);
-      console.log("----------------DOmain---------------------");
-      console.log(domain);
+      // console.log("----------------DOmain---------------------");
+      // console.log(domain);
       console.log("----------------False Course---------------------");
       console.log(falseCourse);
       
@@ -267,6 +272,12 @@ function CSP(domain){
     else{
       // console.log("----------------Domain e dhukar age ---------------");
       // console.log(chosenLecture);
+      // if(reflushCounter >=2 ){
+      //   while(unsuccessfulCourses.length!=0){
+      //     domain.push(unsuccessfulCourses.pop());
+      //   }
+      //   reflushCounter = 0;
+      // }
       // while(unsuccessfulCourses.length!=0){
       //   domain.push(unsuccessfulCourses.pop());
       // }
@@ -446,3 +457,4 @@ if(isSolutionExist){
 // console.log(lecture);
 // console.log(lecture.length);
 // console.log(unsuccessfulCourses);
+console.log(solutionDomain);
